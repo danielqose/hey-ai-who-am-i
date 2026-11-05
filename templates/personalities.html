@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+{% block title %}{{ meta.title or "The 16 Personality Types" }} — Hey AI, who am I?{% endblock %}
+{% block body_class %}page-personalities{% endblock %}
+{% block content %}
+<section class="hero hero-friendly personalities-hero">
+  <p class="eyebrow pill-eyebrow">All 16 types</p>
+  <h1 class="hero-title">{{ meta.title or "The 16 Personality Types" }}</h1>
+  <p class="lede">
+    Browse every type, see how quizzes and AI pick them up, and open a type for the research behind it.
+  </p>
+</section>
+
+<section class="panel howto" aria-label="How quizzes work">
+  <h2>How quizzes work</h2>
+  <p class="hint">{{ how_quizzes.summary }}</p>
+  {% if how_quizzes.formats %}
+  <ul>
+    {% for item in how_quizzes.formats %}<li>{{ item }}</li>{% endfor %}
+  </ul>
+  {% endif %}
+</section>
+
+<section class="panel" aria-label="How AI detects type">
+  <h2>How AI detects type</h2>
+  <p class="hint">{{ how_ai.summary }}</p>
+  {% if how_ai.pipeline %}
+  <ol class="pipe-list">
+    {% for item in how_ai.pipeline %}<li>{{ item }}</li>{% endfor %}
+  </ol>
+  {% endif %}
+  {% if how_ai.limitations %}
+  <h3 class="subhead">Limitations</h3>
+  <ul>
+    {% for item in how_ai.limitations %}<li>{{ item }}</li>{% endfor %}
+  </ul>
+  {% endif %}
+</section>
+
+<section class="roles" aria-label="Personality groups">
+  {% for role in groups %}
+  <div class="role-block" style="--role: {{ role.color }}; --role-soft: {{ role.soft }}">
+    <h2><span class="role-dot"></span>{{ role.name }}</h2>
+    <div class="type-grid">
+      {% for t in role.types %}
+      <a class="type-card type-card-link" href="{{ url_for('personality_detail', slug=t.slug) }}">
+        <div class="type-figure"><img src="{{ url_for('static', filename=t.avatar) }}" alt="{{ t.nickname }} character"></div>
+        <p class="type-nick">{{ t.nickname }}</p>
+        <p class="type-code">{{ t.code }}</p>
+        <p class="type-blurb">{{ t.summary }}</p>
+      </a>
+      {% endfor %}
+    </div>
+  </div>
+  {% endfor %}
+</section>
+
+{% if meta.note %}
+<p class="disclaimer">{{ meta.note }}</p>
+{% endif %}
+{% endblock %}

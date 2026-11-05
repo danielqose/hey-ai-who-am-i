@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% block title %}Hey AI, who am I? — Personality quiz{% endblock %}
+{% block body_class %}page-home{% endblock %}
+{% block content %}
+<section class="hero hero-friendly">
+  <p class="eyebrow pill-eyebrow">A personality quiz, read by a local AI</p>
+  <h1 class="hero-title">Hey AI, <span class="grad">who am I?</span></h1>
+  <p class="lede">
+    Answer 24 short questions. You get a four-letter type, a personal write-up,
+    and a second opinion from an AI running on this very computer.
+  </p>
+  <form method="post" action="{{ url_for('start') }}">
+    <button class="btn btn-xl" type="submit"{% if not ollama.ok %} disabled{% endif %}>
+      Start the quiz <span class="arrow" aria-hidden="true">→</span>
+    </button>
+  </form>
+  <p class="hint">About 5 minutes. Your type shows right away.</p>
+
+  {% set ns = namespace(i=0) %}
+  <div class="lineup" aria-hidden="true">
+    {% for role in roles %}{% for t in role.types %}{% set ns.i = ns.i + 1 %}
+    <img src="{{ url_for('static', filename=t.avatar) }}" alt="" style="--i: {{ ns.i }}">
+    {% endfor %}{% endfor %}
+  </div>
+</section>
+
+<section class="steps" aria-label="How it works">
+  <div class="step"><span class="step-n">1</span><div><h3>Rate 24 statements</h3><p>From “disagree” to “agree”. Go with your gut.</p></div></div>
+  <div class="step"><span class="step-n">2</span><div><h3>Add a few words</h3><p>Optional, but it makes your tips feel personal.</p></div></div>
+  <div class="step"><span class="step-n">3</span><div><h3>Meet your type</h3><p>See if the AI’s own guess matches the quiz.</p></div></div>
+</section>
+
+<section class="roles" aria-label="Personality groups">
+  {% for role in roles %}
+  <div class="role-block" style="--role: {{ role.color }}; --role-soft: {{ role.soft }}">
+    <h2><span class="role-dot"></span>{{ role.label }}</h2>
+    <div class="type-grid">
+      {% for t in role.types %}
+      <a class="type-card type-card-link" href="{{ url_for('personality_detail', slug=t.code|lower) }}">
+        <div class="type-figure"><img src="{{ url_for('static', filename=t.avatar) }}" alt="{{ t.nickname }} character"></div>
+        <p class="type-nick">{{ t.nickname }}</p>
+        <p class="type-code">{{ t.code }}</p>
+        <p class="type-blurb">{{ t.blurb }}</p>
+      </a>
+      {% endfor %}
+    </div>
+  </div>
+  {% endfor %}
+</section>
+{% endblock %}

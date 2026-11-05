@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% block title %}Question {{ number }} — Hey AI, who am I?{% endblock %}
+{% block body_class %}page-quiz{% endblock %}
+{% block content %}
+{% set codes = ['INTJ','ENFP','ISTJ','ESFP','INFJ','ENTP','ISFP','ESTJ','INTP','ENFJ','ISTP','ESFJ','ENTJ','INFP','ESTP','ISFJ'] %}
+{% set quips = ['Go with your gut!', 'No wrong answers here.', 'First instinct wins.', 'Be honest — I won’t tell.', 'Almost like a mirror…', 'Think of a normal week.'] %}
+<section class="quiz">
+  <div class="quiz-card">
+    <div class="quiz-top">
+      <p class="count">Question {{ number }} <span>of {{ total }}</span></p>
+      <p class="pct">{{ progress }}%</p>
+    </div>
+    <div class="progress" role="progressbar" aria-valuenow="{{ number }}" aria-valuemin="1" aria-valuemax="{{ total }}" aria-label="Quiz progress">
+      <span style="width: {{ progress }}%"></span>
+    </div>
+    <h1 class="q-text">{{ text }}</h1>
+    <form method="post" class="scale" action="{{ url_for('quiz') }}">
+      <div class="scale-btns" role="group" aria-label="Agreement from 1 to 5">
+        {% set labels = ['Disagree', '', 'Neutral', '', 'Agree'] %}
+        {% for n in [1, 2, 3, 4, 5] %}
+        <div class="rate-wrap">
+          <button class="rating r{{ n }}" name="rating" value="{{ n }}" type="submit" aria-label="{{ n }} out of 5{% if labels[n-1] %} — {{ labels[n-1] }}{% endif %}">{{ n }}</button>
+          <span class="rate-label">{{ labels[n-1] }}</span>
+        </div>
+        {% endfor %}
+      </div>
+    </form>
+    <p class="kbd-hint">Tip: press <kbd>1</kbd>–<kbd>5</kbd> on your keyboard</p>
+    <div class="peek" aria-hidden="true">
+      <span class="peek-bubble">{{ quips[number % quips|length] }}</span>
+      <img src="{{ url_for('static', filename='chars/' ~ codes[number % 16] ~ '.png') }}" alt="">
+    </div>
+  </div>
+</section>
+{% endblock %}
+{% block scripts %}
+<script>
+  document.addEventListener("keydown", (e) => {
+    if (e.metaKey || e.ctrlKey || e.altKey) return;
+    if (!/^[1-5]$/.test(e.key)) return;
+    const btn = document.querySelector('.rating[value="' + e.key + '"]');
+    if (btn) btn.click();
+  });
+</script>
+{% endblock %}

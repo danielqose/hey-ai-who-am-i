@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}About you — Hey AI, who am I?{% endblock %}
+{% block body_class %}page-describe{% endblock %}
+{% block content %}
+<section class="quiz">
+  <div class="quiz-card describe-card">
+    <p class="eyebrow pill-eyebrow">Last step</p>
+    <h1 class="q-text">Tell the AI a little about yourself</h1>
+    <p class="lede">Optional. A few sentences make your tips feel more personal.</p>
+    <form method="post" action="{{ url_for('describe') }}">
+      <label class="field-label" for="open_text">About you</label>
+      <textarea id="open_text" name="open_text" rows="5" maxlength="800" placeholder="How you work with people, how you decide, what a typical week feels like…"></textarea>
+      <button class="btn btn-xl" type="submit">See my result <span class="arrow" aria-hidden="true">→</span></button>
+    </form>
+    <div class="peek" aria-hidden="true">
+      <span class="peek-bubble">Nearly there!</span>
+      <img src="{{ url_for('static', filename='chars/ENFJ.png') }}" alt="">
+    </div>
+  </div>
+</section>
+{% endblock %}

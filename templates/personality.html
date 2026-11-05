@@ -1,0 +1,139 @@
+{% extends "base.html" %}
+{% set t = p.type %}
+{% block title %}{{ t.code }} — {{ t.nickname }} — Hey AI, who am I?{% endblock %}
+{% block body_class %}page-personality{% endblock %}
+{% block head %}
+<meta name="description" content="{{ t.nickname }}: {{ t.summary }}">
+<style>
+  body.page-personality {
+    --accent: {{ p.color }};
+    --accent-ink: #ffffff;
+    --fill: {{ p.color }};
+    --role-soft: {{ p.soft }};
+    --role-ink: {{ p.ink }};
+  }
+</style>
+{% endblock %}
+{% block content %}
+<p class="crumb">
+  <a href="{{ url_for('personalities') }}">← All personalities</a>
+</p>
+
+<section class="result-hero result-hero-card personality-hero">
+  <span class="hero-watermark" aria-hidden="true">{{ t.code }}</span>
+  <div class="result-hero-text">
+    <p class="eyebrow">{{ t.group }}</p>
+    <p class="type-mark">{{ t.code }}</p>
+    <h1>{{ t.nickname }}</h1>
+    <p class="lede">{{ t.summary }}</p>
+    <p class="pop-note">About {{ t.us_population_pct }}% of the US sample</p>
+    <div class="fn-pills" aria-label="Cognitive function stack">
+      {% for fn in t.function_stack %}
+      <span class="fn-pill{% if loop.first %} is-dom{% endif %}">{{ fn }}{% if loop.first %} · dominant{% endif %}</span>
+      {% endfor %}
+    </div>
+  </div>
+  <div class="personality-hero-art" aria-hidden="true">
+    <img src="{{ url_for('static', filename=p.avatar) }}" alt="">
+  </div>
+</section>
+
+<section class="panel">
+  <h2>Core characteristics</h2>
+  <p class="body-copy">{{ t.core_characteristics }}</p>
+</section>
+
+<section class="lists">
+  <div class="info-card">
+    <h2>Strengths</h2>
+    <ul>{% for item in t.strengths %}<li>{{ item }}</li>{% endfor %}</ul>
+  </div>
+  <div class="info-card">
+    <h2>Blind spots</h2>
+    <ul>{% for item in t.blind_spots %}<li>{{ item }}</li>{% endfor %}</ul>
+  </div>
+</section>
+
+<section class="tip-grid personality-blocks">
+  <div class="info-card">
+    <h3>Relationships &amp; communication</h3>
+    <p class="body-copy">{{ t.relationships_and_communication }}</p>
+  </div>
+  <div class="info-card">
+    <h3>Work tendencies</h3>
+    <p class="body-copy">{{ t.work_tendencies }}</p>
+  </div>
+  <div class="info-card">
+    <h3>Under stress</h3>
+    <p class="body-copy">{{ t.under_stress }}</p>
+  </div>
+</section>
+
+<section class="panel">
+  <h2>Big Five tendencies</h2>
+  <p class="body-copy">{{ t.big_five_tendencies }}</p>
+</section>
+
+<section class="panel">
+  <h2>Research and studies</h2>
+  <p class="body-copy">{{ t.research_notes }}</p>
+  {% if t.studies_note %}<p class="hint">{{ t.studies_note }}</p>{% endif %}
+  {% if p.studies %}
+  <details class="studies-box" open>
+    <summary>Show {{ p.studies|length }} related studies</summary>
+    <ul class="study-list">
+      {% for s in p.studies %}
+      <li>
+        <p class="study-cite"><strong>{{ s.year }}</strong> — {{ s.citation }}</p>
+        <p class="body-copy">{{ s.summary }}</p>
+      </li>
+      {% endfor %}
+    </ul>
+  </details>
+  {% endif %}
+</section>
+
+<section class="panel">
+  <h2>How AI detects this type</h2>
+  <ul>{% for item in t.ai_detection_signals %}<li>{{ item }}</li>{% endfor %}</ul>
+</section>
+
+<section class="panel">
+  <h2>How quizzes detect this type</h2>
+  <p class="body-copy"><strong>Profile:</strong> {{ t.quiz_detection.profile }}</p>
+  <h3 class="subhead">Typical agreement items</h3>
+  <ul>
+    {% for item in t.quiz_detection.typical_agreement_items %}<li>{{ item }}</li>{% endfor %}
+  </ul>
+</section>
+
+<section class="panel">
+  <h2>Commonly confused with</h2>
+  <ul class="confused-list">
+    {% for c in t.commonly_confused_with %}
+    <li>
+      <a href="{{ url_for('personality_detail', slug=c.code|lower) }}">{{ c.code }}</a>
+      — {{ c.difference }}
+    </li>
+    {% endfor %}
+  </ul>
+</section>
+
+<nav class="type-nav" aria-label="Nearby types">
+  {% if p.prev %}
+  <a class="btn btn-ghost" href="{{ url_for('personality_detail', slug=p.prev.slug) }}">← {{ p.prev.code }}</a>
+  {% else %}
+  <span></span>
+  {% endif %}
+  <a class="btn btn-ghost" href="{{ url_for('personalities') }}">All personalities</a>
+  {% if p.next %}
+  <a class="btn btn-ghost" href="{{ url_for('personality_detail', slug=p.next.slug) }}">{{ p.next.code }} →</a>
+  {% else %}
+  <span></span>
+  {% endif %}
+</nav>
+
+{% if p.meta_note %}
+<p class="disclaimer">{{ p.meta_note }}</p>
+{% endif %}
+{% endblock %}

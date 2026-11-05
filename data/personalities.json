@@ -1,0 +1,1526 @@
+{
+  "meta": {
+    "title": "The 16 Personality Types",
+    "version": "1.0",
+    "note": "Study citations were written from memory of the literature. Verify each before publishing. Percentages and correlations are approximate. Frame results as entertainment and self-reflection, not diagnosis.",
+    "us_frequency_source": "MBTI Manual (1998) US national sample, approximate"
+  },
+  "dimensions": [
+    {
+      "id": "EI",
+      "poles": [
+        "E",
+        "I"
+      ],
+      "name": "Energy",
+      "description": "Outer world of people and action vs. inner world of thought and reflection",
+      "big_five": "Extraversion"
+    },
+    {
+      "id": "SN",
+      "poles": [
+        "S",
+        "N"
+      ],
+      "name": "Information",
+      "description": "Concrete facts and present detail vs. patterns and possibilities",
+      "big_five": "Openness"
+    },
+    {
+      "id": "TF",
+      "poles": [
+        "T",
+        "F"
+      ],
+      "name": "Decisions",
+      "description": "Logic and objective criteria vs. values and impact on people",
+      "big_five": "Agreeableness"
+    },
+    {
+      "id": "JP",
+      "poles": [
+        "J",
+        "P"
+      ],
+      "name": "Lifestyle",
+      "description": "Planned and decided vs. flexible and spontaneous",
+      "big_five": "Conscientiousness"
+    }
+  ],
+  "groups": [
+    {
+      "name": "Analysts",
+      "types": [
+        "INTJ",
+        "INTP",
+        "ENTJ",
+        "ENTP"
+      ]
+    },
+    {
+      "name": "Diplomats",
+      "types": [
+        "INFJ",
+        "INFP",
+        "ENFJ",
+        "ENFP"
+      ]
+    },
+    {
+      "name": "Sentinels",
+      "types": [
+        "ISTJ",
+        "ISFJ",
+        "ESTJ",
+        "ESFJ"
+      ]
+    },
+    {
+      "name": "Explorers",
+      "types": [
+        "ISTP",
+        "ISFP",
+        "ESTP",
+        "ESFP"
+      ]
+    }
+  ],
+  "how_quizzes_work": {
+    "summary": "Each question maps to one dichotomy and one pole. Answers add weighted points to a pole; the higher total wins. Likert items are signed (for example -3..+3) and opposite-pole items are reverse-scored.",
+    "pseudo_code": "score_D = sum(answer_value * direction * weight); letter = A if score_D > 0 else B; percent_A = 50 + 50 * score_D / max_possible",
+    "formats": [
+      "Forced choice (official MBTI Form M, 93 items)",
+      "Likert agreement (most free tests)",
+      "Scenario questions"
+    ]
+  },
+  "how_ai_detects": {
+    "summary": "Personality shapes word choice, topics, sentence structure and sentiment. Models learn weak statistical links between text and known types and combine hundreds of cues. Best shown as per-dimension probabilities.",
+    "pipeline": [
+      "Collect labelled text",
+      "Clean and remove explicit type mentions (label leakage)",
+      "Represent text (TF-IDF, LIWC, transformer embeddings)",
+      "Classify with four binary classifiers",
+      "Evaluate with balanced accuracy and macro-F1"
+    ],
+    "limitations": [
+      "Noisy self-reported labels",
+      "Label leakage",
+      "Class imbalance (INFP/INFJ/INTP/INTJ over-represented online)",
+      "Topic confounding",
+      "Platform and context effects",
+      "Privacy and consent"
+    ]
+  },
+  "studies": [
+    {
+      "id": "mccrae1989",
+      "citation": "McCrae, R. R., & Costa, P. T. (1989). Reinterpreting the Myers-Briggs Type Indicator from the perspective of the five-factor model of personality. Journal of Personality, 57(1), 17-40.",
+      "year": 1989,
+      "summary": "Showed each MBTI scale maps onto a Big Five trait: E/I with Extraversion, S/N with Openness, T/F with Agreeableness, J/P with Conscientiousness. Argued the scales are continuous, not two-type categories.",
+      "dimensions": [
+        "EI",
+        "SN",
+        "TF",
+        "JP"
+      ]
+    },
+    {
+      "id": "furnham1996",
+      "citation": "Furnham, A. (1996). The big five versus the big four: the relationship between the Myers-Briggs Type Indicator and NEO-PI five factor model of personality. Personality and Individual Differences, 21(2).",
+      "year": 1996,
+      "summary": "Replicated the MBTI-to-Big-Five pattern and noted Neuroticism has no MBTI counterpart.",
+      "dimensions": [
+        "EI",
+        "SN",
+        "TF",
+        "JP"
+      ]
+    },
+    {
+      "id": "pittenger1993",
+      "citation": "Pittenger, D. J. (1993). Measuring the MBTI... and coming up short. Journal of Career Planning and Employment, 54(1).",
+      "year": 1993,
+      "summary": "Influential critique of the MBTI's reliability, validity and the either-or typing of continuous traits.",
+      "dimensions": [
+        "EI",
+        "SN",
+        "TF",
+        "JP"
+      ]
+    },
+    {
+      "id": "pittenger2005",
+      "citation": "Pittenger, D. J. (2005). Cautionary comments regarding the Myers-Briggs Type Indicator. Consulting Psychology Journal, 57(3).",
+      "year": 2005,
+      "summary": "Updated review of reliability and validity concerns, including how often people change type on retest.",
+      "dimensions": [
+        "EI",
+        "SN",
+        "TF",
+        "JP"
+      ]
+    },
+    {
+      "id": "capraro2002",
+      "citation": "Capraro, R. M., & Capraro, M. M. (2002). Myers-Briggs Type Indicator score reliability across studies: a meta-analytic reliability generalization study. Educational and Psychological Measurement, 62(4).",
+      "year": 2002,
+      "summary": "Meta-analysis suggesting internal consistency of the MBTI scales is generally acceptable.",
+      "dimensions": [
+        "EI",
+        "SN",
+        "TF",
+        "JP"
+      ]
+    },
+    {
+      "id": "boyle1995",
+      "citation": "Boyle, G. J. (1995). Myers-Briggs Type Indicator (MBTI): some psychometric limitations. Australian Psychologist, 30(1).",
+      "year": 1995,
+      "summary": "Review of psychometric limitations of the MBTI.",
+      "dimensions": [
+        "EI",
+        "SN",
+        "TF",
+        "JP"
+      ]
+    },
+    {
+      "id": "mccarley1983",
+      "citation": "McCarley, N. G., & Carskadon, T. G. (1983). Test-retest reliabilities of scales and subscales of the MBTI and of criterion-keyed Form G for Sensing-Intuition. Journal of Psychological Type.",
+      "year": 1983,
+      "summary": "Early test-retest work often cited for type-change rates over short intervals.",
+      "dimensions": [
+        "EI",
+        "SN",
+        "TF",
+        "JP"
+      ]
+    },
+    {
+      "id": "pennebaker1999",
+      "citation": "Pennebaker, J. W., & King, L. A. (1999). Linguistic styles: language use as an individual difference. Journal of Personality and Social Psychology, 77(6).",
+      "year": 1999,
+      "summary": "Showed word-category use (LIWC approach) is stable within people and relates to personality.",
+      "dimensions": [
+        "EI",
+        "SN",
+        "TF",
+        "JP"
+      ]
+    },
+    {
+      "id": "mairesse2007",
+      "citation": "Mairesse, F., Walker, M. A., Mehl, M. R., & Moore, R. K. (2007). Using linguistic cues for the automatic recognition of personality in conversation and text. Journal of Artificial Intelligence Research, 30.",
+      "year": 2007,
+      "summary": "Early automatic personality recognition from text and speech.",
+      "dimensions": [
+        "EI",
+        "SN",
+        "TF",
+        "JP"
+      ]
+    },
+    {
+      "id": "yarkoni2010",
+      "citation": "Yarkoni, T. (2010). Personality in 100,000 words: a large-scale analysis of personality and word use among bloggers. Journal of Research in Personality, 44(3).",
+      "year": 2010,
+      "summary": "Linked Big Five traits to specific word categories in blog text, e.g. Neuroticism with negative emotion words, Extraversion with social words.",
+      "dimensions": [
+        "EI",
+        "SN"
+      ]
+    },
+    {
+      "id": "schwartz2013",
+      "citation": "Schwartz, H. A., et al. (2013). Personality, gender, and age in the language of social media: the open-vocabulary approach. PLoS ONE, 8(9).",
+      "year": 2013,
+      "summary": "Analyzed Facebook language of about 75,000 volunteers and found interpretable word and topic differences by Big Five trait.",
+      "dimensions": [
+        "EI",
+        "SN",
+        "TF",
+        "JP"
+      ]
+    },
+    {
+      "id": "kosinski2013",
+      "citation": "Kosinski, M., Stillwell, D., & Graepel, T. (2013). Private traits and attributes are predictable from digital records of human behavior. PNAS, 110(15).",
+      "year": 2013,
+      "summary": "Predicted personality and other traits from Facebook Likes.",
+      "dimensions": [
+        "EI",
+        "SN"
+      ]
+    },
+    {
+      "id": "youyou2015",
+      "citation": "Youyou, W., Kosinski, M., & Stillwell, D. (2015). Computer-based personality judgments are more accurate than those made by humans. PNAS, 112(4).",
+      "year": 2015,
+      "summary": "Found computer judgments from Likes beat judgments by friends and family at certain data sizes.",
+      "dimensions": [
+        "EI",
+        "SN",
+        "TF",
+        "JP"
+      ]
+    },
+    {
+      "id": "matz2017",
+      "citation": "Matz, S. C., Kosinski, M., Nave, G., & Stillwell, D. J. (2017). Psychological targeting as an effective approach to digital mass persuasion. PNAS, 114(48).",
+      "year": 2017,
+      "summary": "Showed personality-targeted ads can be more effective, which is why transparency and consent matter.",
+      "dimensions": [
+        "EI",
+        "SN",
+        "TF",
+        "JP"
+      ]
+    },
+    {
+      "id": "plank2015",
+      "citation": "Plank, B., & Hovy, D. (2015). Personality traits on Twitter, or how to get 1,500 personality tests in a week. Workshop on Computational Approaches to Subjectivity, Sentiment and Social Media Analysis.",
+      "year": 2015,
+      "summary": "Trained classifiers on tweets from users who stated their MBTI type; some dimensions were more predictable than others.",
+      "dimensions": [
+        "EI",
+        "SN",
+        "TF",
+        "JP"
+      ]
+    },
+    {
+      "id": "gjurkovic2018",
+      "citation": "Gjurkovic, M., & Snajder, J. (2018). Reddit: a gold mine for personality prediction. Workshop on Computational Modeling of People's Opinions, Personality, and Emotions in Social Media.",
+      "year": 2018,
+      "summary": "Built an MBTI-labelled Reddit dataset and tested prediction from posts.",
+      "dimensions": [
+        "EI",
+        "SN",
+        "TF",
+        "JP"
+      ]
+    },
+    {
+      "id": "gjurkovic2021",
+      "citation": "Gjurkovic, M., et al. (2021). PANDORA talks: personality and demographics on Reddit. Workshop on Natural Language Processing for Computational Social Science.",
+      "year": 2021,
+      "summary": "PANDORA dataset: Reddit users with MBTI, Big Five and Enneagram labels plus demographics.",
+      "dimensions": [
+        "EI",
+        "SN",
+        "TF",
+        "JP"
+      ]
+    },
+    {
+      "id": "rao2023",
+      "citation": "Rao, H., Leung, C., & Miao, C. (2023). Can ChatGPT assess human personalities? A general evaluation framework. arXiv.",
+      "year": 2023,
+      "summary": "Evaluated whether ChatGPT can assess personality from text; results were meaningful but sensitive to prompt wording.",
+      "dimensions": [
+        "EI",
+        "SN",
+        "TF",
+        "JP"
+      ]
+    },
+    {
+      "id": "serapio2023",
+      "citation": "Serapio-Garcia, G., et al. (2023). Personality traits in large language models. arXiv.",
+      "year": 2023,
+      "summary": "Found larger instruction-tuned LLMs give reliable, valid personality-test answers and that expressed personality can be shaped by prompting.",
+      "dimensions": [
+        "EI",
+        "SN",
+        "TF",
+        "JP"
+      ]
+    },
+    {
+      "id": "jiang2023",
+      "citation": "Jiang, H., et al. (2023). PersonaLLM: investigating the ability of large language models to express personality traits. arXiv.",
+      "year": 2023,
+      "summary": "Persona-prompted LLMs wrote text that reflected the assigned traits.",
+      "dimensions": [
+        "EI",
+        "SN",
+        "TF",
+        "JP"
+      ]
+    },
+    {
+      "id": "peters2024",
+      "citation": "Peters, H., & Matz, S. C. (2024). Large language models can infer psychological dispositions of social media users. PNAS Nexus.",
+      "year": 2024,
+      "summary": "LLMs inferred Big Five dispositions from social media posts at better-than-chance levels.",
+      "dimensions": [
+        "EI",
+        "SN",
+        "TF",
+        "JP"
+      ]
+    }
+  ],
+  "types": [
+    {
+      "code": "INTJ",
+      "slug": "intj",
+      "nickname": "The Architect",
+      "group": "Analysts",
+      "function_stack": [
+        "Ni",
+        "Te",
+        "Fi",
+        "Se"
+      ],
+      "us_population_pct": 2.1,
+      "big_five_tendencies": "High Openness and Conscientiousness; lower Extraversion and Agreeableness.",
+      "summary": "Independent long-range strategists who build mental models of systems and look for the most efficient way to improve them.",
+      "core_characteristics": "Driven by competence and vision, hold high standards for self and others, reserved or intense socially.",
+      "strengths": [
+        "Long-term planning",
+        "Systems thinking",
+        "Self-direction",
+        "Decisiveness once a conclusion is reached"
+      ],
+      "blind_spots": [
+        "Can seem cold or dismissive of emotion",
+        "Impatient with slower thinking",
+        "May undervalue the present moment (inferior Se)",
+        "Perfectionism"
+      ],
+      "relationships_and_communication": "Direct, concise, low small talk. Shows loyalty through actions and problem-solving. Prefers few, deep relationships.",
+      "work_tendencies": "Strategy, engineering, research, law, architecture, investing, systems design. Wants autonomy and to be judged on results.",
+      "under_stress": "Inferior Se can appear as impulsive indulgence, sensory overload, or fixating on irrelevant physical details.",
+      "research_notes": "Often studied in leadership and entrepreneurship samples, but results depend on the test. Heavily over-represented in internet datasets relative to its real-world rarity.",
+      "ai_detection_signals": [
+        "Abstract nouns and strategy vocabulary (long-term, framework, optimize, system)",
+        "Logical connectors",
+        "Low emotional vocabulary",
+        "Compact precise sentences",
+        "Plainly stated critiques",
+        "Few exclamation marks"
+      ],
+      "quiz_detection": {
+        "typical_agreement_items": [
+          "I enjoy making long-term plans",
+          "I would rather work alone than in a group",
+          "Logic matters more than feelings in decisions",
+          "I like having a clear schedule"
+        ],
+        "profile": "strong I + strong N + strong T + strong J"
+      },
+      "commonly_confused_with": [
+        {
+          "code": "INTP",
+          "difference": "INTJs decide and execute; INTPs explore and keep options open"
+        },
+        {
+          "code": "INFJ",
+          "difference": "INFJs weigh values and people more"
+        }
+      ],
+      "online_dataset_representation": "over-represented",
+      "study_ids": [
+        "mccrae1989",
+        "pittenger2005",
+        "capraro2002",
+        "plank2015",
+        "gjurkovic2021",
+        "peters2024",
+        "yarkoni2010",
+        "schwartz2013",
+        "kosinski2013",
+        "pennebaker1999",
+        "mairesse2007"
+      ],
+      "studies_note": "Few studies examine a single four-letter type directly. These are the studies most relevant to this type's dimensions (I/N/T/J), plus the core validity and AI-detection papers."
+    },
+    {
+      "code": "INTP",
+      "slug": "intp",
+      "nickname": "The Logician",
+      "group": "Analysts",
+      "function_stack": [
+        "Ti",
+        "Ne",
+        "Si",
+        "Fe"
+      ],
+      "us_population_pct": 3.3,
+      "big_five_tendencies": "Very high Openness; lower Extraversion and Conscientiousness; low-to-moderate Agreeableness.",
+      "summary": "Curious, theory-driven thinkers motivated by understanding how and why things work.",
+      "core_characteristics": "Build internal logical frameworks, enjoy ideas for their own sake, love precise definitions and finding inconsistencies.",
+      "strengths": [
+        "Analytical depth",
+        "Creative problem solving",
+        "Intellectual honesty",
+        "Comfort with ambiguity"
+      ],
+      "blind_spots": [
+        "Procrastination and unfinished projects",
+        "Overanalysis",
+        "Neglects practical and social details",
+        "Can seem detached"
+      ],
+      "relationships_and_communication": "Enjoys debate and idea-sharing; shows care by sharing interests and solving problems. Quiet in groups unless the topic engages them.",
+      "work_tendencies": "Science, software, mathematics, philosophy, research, game design, data analysis. Wants flexible deadlines and intellectual freedom.",
+      "under_stress": "Inferior Fe can show as oversensitivity to criticism, feeling misunderstood, or sudden emotional outbursts.",
+      "research_notes": "Strongly tied to Openness in MBTI-Big Five studies. Common in online programming and philosophy communities.",
+      "ai_detection_signals": [
+        "Hedged, qualified statements (technically, in theory, it depends)",
+        "Definitions and edge cases",
+        "Long explanations with self-corrections",
+        "Interest in systems, logic, science, games",
+        "Little emotional self-disclosure",
+        "Tangents"
+      ],
+      "quiz_detection": {
+        "typical_agreement_items": [
+          "I enjoy abstract or theoretical discussion",
+          "I get lost in my own thoughts",
+          "I find it hard to stick to a rigid plan",
+          "I value accuracy over tact"
+        ],
+        "profile": "strong I + strong N + strong T + strong P"
+      },
+      "commonly_confused_with": [
+        {
+          "code": "INTJ",
+          "difference": "INTJs plan and execute"
+        },
+        {
+          "code": "ISTP",
+          "difference": "ISTPs are more concrete and hands-on"
+        }
+      ],
+      "online_dataset_representation": "over-represented",
+      "study_ids": [
+        "mccrae1989",
+        "pittenger2005",
+        "capraro2002",
+        "plank2015",
+        "gjurkovic2021",
+        "peters2024",
+        "yarkoni2010",
+        "schwartz2013",
+        "kosinski2013",
+        "pennebaker1999",
+        "mairesse2007"
+      ],
+      "studies_note": "Few studies examine a single four-letter type directly. These are the studies most relevant to this type's dimensions (I/N/T/P), plus the core validity and AI-detection papers."
+    },
+    {
+      "code": "ENTJ",
+      "slug": "entj",
+      "nickname": "The Commander",
+      "group": "Analysts",
+      "function_stack": [
+        "Te",
+        "Ni",
+        "Se",
+        "Fi"
+      ],
+      "us_population_pct": 1.8,
+      "big_five_tendencies": "High Extraversion (assertiveness), Conscientiousness and Openness; lower Agreeableness.",
+      "summary": "Natural organizers who set goals, build plans and mobilize people to execute them.",
+      "core_characteristics": "Confident, decisive and efficiency-minded; comfortable leading and making tough calls.",
+      "strengths": [
+        "Leadership",
+        "Strategic planning",
+        "Decisiveness",
+        "Resilience"
+      ],
+      "blind_spots": [
+        "Can be domineering or impatient",
+        "May overlook emotions",
+        "Pushes too hard, struggles to rest (inferior Fi)"
+      ],
+      "relationships_and_communication": "Direct, assertive, goal-oriented. Shows care through support, provision and high expectations.",
+      "work_tendencies": "Management, entrepreneurship, law, consulting, executive roles, project leadership.",
+      "under_stress": "Inferior Fi can show as hurt feelings they rarely admit, withdrawal, or sudden moral outbursts.",
+      "research_notes": "Over-represented among senior managers in some MBTI samples, partly why it is called a leadership type. Selection and self-report effects are large, so interpret carefully.",
+      "ai_detection_signals": [
+        "Directive language (we need to, the plan is, let's)",
+        "Goals, metrics and deadlines",
+        "Confident tone, few hedges",
+        "Business and leadership vocabulary"
+      ],
+      "quiz_detection": {
+        "typical_agreement_items": [
+          "I naturally take charge in groups",
+          "I set clear goals and pursue them",
+          "I am comfortable giving direct criticism",
+          "I like decisions settled"
+        ],
+        "profile": "strong E + strong N + strong T + strong J"
+      },
+      "commonly_confused_with": [
+        {
+          "code": "ESTJ",
+          "difference": "ENTJs are more visionary; ESTJs more tradition and procedure oriented"
+        },
+        {
+          "code": "ENTP",
+          "difference": "ENTJs drive toward closure"
+        }
+      ],
+      "online_dataset_representation": "under-represented",
+      "study_ids": [
+        "mccrae1989",
+        "pittenger2005",
+        "capraro2002",
+        "plank2015",
+        "gjurkovic2021",
+        "peters2024",
+        "yarkoni2010",
+        "schwartz2013",
+        "kosinski2013",
+        "pennebaker1999",
+        "mairesse2007"
+      ],
+      "studies_note": "Few studies examine a single four-letter type directly. These are the studies most relevant to this type's dimensions (E/N/T/J), plus the core validity and AI-detection papers."
+    },
+    {
+      "code": "ENTP",
+      "slug": "entp",
+      "nickname": "The Debater",
+      "group": "Analysts",
+      "function_stack": [
+        "Ne",
+        "Ti",
+        "Fe",
+        "Si"
+      ],
+      "us_population_pct": 3.2,
+      "big_five_tendencies": "High Extraversion, very high Openness; lower Conscientiousness; moderate-to-low Agreeableness.",
+      "summary": "Quick, inventive thinkers energized by ideas and intellectual sparring.",
+      "core_characteristics": "Challenge assumptions, play devil's advocate, explore many possibilities at once.",
+      "strengths": [
+        "Creativity",
+        "Adaptability",
+        "Verbal agility",
+        "Seeing multiple perspectives"
+      ],
+      "blind_spots": [
+        "Starts more than they finish",
+        "Argues for sport and can upset people",
+        "Dislikes routine and admin detail"
+      ],
+      "relationships_and_communication": "Playful, witty, stimulating. Enjoys banter; partners need to tolerate debate without taking it personally.",
+      "work_tendencies": "Entrepreneurship, innovation, consulting, marketing, law, product strategy, media.",
+      "under_stress": "Inferior Si can show as fixating on past mistakes, physical symptoms, or uncharacteristically rigid routines.",
+      "research_notes": "High Openness and Extraversion fit the innovator stereotype. Evidence is correlational.",
+      "ai_detection_signals": [
+        "Question-heavy text (what if, actually, on the other hand)",
+        "Playful or sarcastic tone",
+        "Rapid topic jumps and analogies",
+        "Argumentative framing"
+      ],
+      "quiz_detection": {
+        "typical_agreement_items": [
+          "I enjoy debating even when I don't fully agree",
+          "I get bored with routine",
+          "I like exploring many ideas",
+          "Lively discussion energizes me"
+        ],
+        "profile": "strong E + strong N + strong T + strong P"
+      },
+      "commonly_confused_with": [
+        {
+          "code": "ENFP",
+          "difference": "ENFPs lead with values and emotion; ENTPs with logic"
+        },
+        {
+          "code": "INTP",
+          "difference": "Similar thinking style, different energy"
+        }
+      ],
+      "online_dataset_representation": "roughly proportional",
+      "study_ids": [
+        "mccrae1989",
+        "pittenger2005",
+        "capraro2002",
+        "plank2015",
+        "gjurkovic2021",
+        "peters2024",
+        "yarkoni2010",
+        "schwartz2013",
+        "kosinski2013",
+        "pennebaker1999",
+        "mairesse2007"
+      ],
+      "studies_note": "Few studies examine a single four-letter type directly. These are the studies most relevant to this type's dimensions (E/N/T/P), plus the core validity and AI-detection papers."
+    },
+    {
+      "code": "INFJ",
+      "slug": "infj",
+      "nickname": "The Advocate",
+      "group": "Diplomats",
+      "function_stack": [
+        "Ni",
+        "Fe",
+        "Ti",
+        "Se"
+      ],
+      "us_population_pct": 1.5,
+      "big_five_tendencies": "High Openness; moderate Agreeableness; lower Extraversion; often higher Neuroticism in self-report samples.",
+      "summary": "Insightful idealists who look for deeper meaning and patterns and want to help people.",
+      "core_characteristics": "Combine a strong inner vision with sensitivity to others' emotions.",
+      "strengths": [
+        "Empathy",
+        "Long-term vision",
+        "Writing and counseling skill",
+        "Principled commitment"
+      ],
+      "blind_spots": [
+        "Perfectionism",
+        "Burnout from absorbing others' emotions",
+        "Difficulty with boundaries",
+        "May withdraw suddenly"
+      ],
+      "relationships_and_communication": "Warm and thoughtful in small, deep conversations; seeks authenticity. Often listens more than speaks.",
+      "work_tendencies": "Counseling, teaching, writing, healthcare, nonprofit work, design, HR.",
+      "under_stress": "Inferior Se can show as sensory overload, indulgence, or obsessing over environmental details.",
+      "research_notes": "Rarest type in the 1998 US sample yet among the most discussed online: a standard example of dataset bias.",
+      "ai_detection_signals": [
+        "Reflective values-laden language (meaning, purpose, authentic)",
+        "Empathic statements",
+        "Metaphorical phrasing",
+        "Long considered paragraphs",
+        "Mentions of introversion and exhaustion"
+      ],
+      "quiz_detection": {
+        "typical_agreement_items": [
+          "I often sense what others feel",
+          "I prefer deep conversations to small talk",
+          "I need alone time to recharge",
+          "I like to plan ahead"
+        ],
+        "profile": "strong I + strong N + strong F + strong J"
+      },
+      "commonly_confused_with": [
+        {
+          "code": "INFP",
+          "difference": "INFJs are more structured and externally focused"
+        },
+        {
+          "code": "INTJ",
+          "difference": "INFJs weigh people and values more"
+        }
+      ],
+      "online_dataset_representation": "heavily over-represented",
+      "study_ids": [
+        "mccrae1989",
+        "pittenger2005",
+        "capraro2002",
+        "plank2015",
+        "gjurkovic2021",
+        "peters2024",
+        "yarkoni2010",
+        "schwartz2013",
+        "kosinski2013",
+        "pennebaker1999",
+        "mairesse2007"
+      ],
+      "studies_note": "Few studies examine a single four-letter type directly. These are the studies most relevant to this type's dimensions (I/N/F/J), plus the core validity and AI-detection papers."
+    },
+    {
+      "code": "INFP",
+      "slug": "infp",
+      "nickname": "The Mediator",
+      "group": "Diplomats",
+      "function_stack": [
+        "Fi",
+        "Ne",
+        "Si",
+        "Te"
+      ],
+      "us_population_pct": 4.4,
+      "big_five_tendencies": "High Openness; lower Extraversion and Conscientiousness; higher Agreeableness; often higher Neuroticism in self-report samples.",
+      "summary": "Imaginative, introspective people guided by strong personal values.",
+      "core_characteristics": "Seek authenticity, are sensitive to meaning and beauty, often channel feeling into creative work.",
+      "strengths": [
+        "Empathy",
+        "Creativity",
+        "Open-mindedness",
+        "Loyalty to values"
+      ],
+      "blind_spots": [
+        "Self-criticism",
+        "Conflict avoidance",
+        "Procrastination on practical tasks",
+        "Idealizing then being disillusioned"
+      ],
+      "relationships_and_communication": "Gentle, curious, accepting. Needs emotional honesty and space to be themselves.",
+      "work_tendencies": "Writing, art, psychology, counseling, music, humanitarian work, design.",
+      "under_stress": "Inferior Te can show as harsh criticism of self or others, or obsessive over-organization.",
+      "research_notes": "Common in creative-writing and fandom communities that feed forum datasets. N and P preferences often relate to creative-personality scales.",
+      "ai_detection_signals": [
+        "First-person emotional language (I feel, I wish)",
+        "Values and identity words",
+        "Imagery",
+        "Creative interests",
+        "Soft, hedged phrasing"
+      ],
+      "quiz_detection": {
+        "typical_agreement_items": [
+          "I often daydream",
+          "My values guide me more than rules",
+          "I find strict schedules hard",
+          "I prefer quiet environments"
+        ],
+        "profile": "strong I + strong N + strong F + strong P"
+      },
+      "commonly_confused_with": [
+        {
+          "code": "INFJ",
+          "difference": "INFPs are more flexible and inward-focused"
+        },
+        {
+          "code": "ISFP",
+          "difference": "ISFPs are more concrete and sensory"
+        }
+      ],
+      "online_dataset_representation": "over-represented",
+      "study_ids": [
+        "mccrae1989",
+        "pittenger2005",
+        "capraro2002",
+        "plank2015",
+        "gjurkovic2021",
+        "peters2024",
+        "yarkoni2010",
+        "schwartz2013",
+        "kosinski2013",
+        "pennebaker1999",
+        "mairesse2007"
+      ],
+      "studies_note": "Few studies examine a single four-letter type directly. These are the studies most relevant to this type's dimensions (I/N/F/P), plus the core validity and AI-detection papers."
+    },
+    {
+      "code": "ENFJ",
+      "slug": "enfj",
+      "nickname": "The Protagonist",
+      "group": "Diplomats",
+      "function_stack": [
+        "Fe",
+        "Ni",
+        "Se",
+        "Ti"
+      ],
+      "us_population_pct": 2.5,
+      "big_five_tendencies": "High Extraversion, Agreeableness and Openness; higher Conscientiousness.",
+      "summary": "Charismatic, warm people motivated to bring out the best in others.",
+      "core_characteristics": "Read group dynamics quickly and take responsibility for helping others succeed.",
+      "strengths": [
+        "Communication",
+        "Motivation and mentoring",
+        "Organizing people",
+        "Empathy with initiative"
+      ],
+      "blind_spots": [
+        "Over-giving and over-investing in others' choices",
+        "Sensitivity to criticism",
+        "Neglecting own needs"
+      ],
+      "relationships_and_communication": "Expressive, supportive, attentive; often the glue of a group.",
+      "work_tendencies": "Teaching, coaching, counseling, HR, nonprofit leadership, sales, public speaking.",
+      "under_stress": "Inferior Ti can show as cold, hyper-critical self-analysis and rigid logic that feels out of character.",
+      "research_notes": "Frequently cited in teaching and leadership studies using MBTI; sample bias is large.",
+      "ai_detection_signals": [
+        "Inclusive encouraging language (we, together, you can)",
+        "Emotional and relationship vocabulary",
+        "Positive sentiment",
+        "Questions about others",
+        "Motivational phrasing"
+      ],
+      "quiz_detection": {
+        "typical_agreement_items": [
+          "I am attuned to the moods around me",
+          "I enjoy motivating others",
+          "I like organizing group activities",
+          "Harmony matters to me"
+        ],
+        "profile": "strong E + strong N + strong F + strong J"
+      },
+      "commonly_confused_with": [
+        {
+          "code": "ESFJ",
+          "difference": "ENFJs focus on potential and meaning; ESFJs on practical care and tradition"
+        },
+        {
+          "code": "ENFP",
+          "difference": "ENFPs are more spontaneous"
+        }
+      ],
+      "online_dataset_representation": "roughly proportional",
+      "study_ids": [
+        "mccrae1989",
+        "pittenger2005",
+        "capraro2002",
+        "plank2015",
+        "gjurkovic2021",
+        "peters2024",
+        "yarkoni2010",
+        "schwartz2013",
+        "kosinski2013",
+        "pennebaker1999",
+        "mairesse2007"
+      ],
+      "studies_note": "Few studies examine a single four-letter type directly. These are the studies most relevant to this type's dimensions (E/N/F/J), plus the core validity and AI-detection papers."
+    },
+    {
+      "code": "ENFP",
+      "slug": "enfp",
+      "nickname": "The Campaigner",
+      "group": "Diplomats",
+      "function_stack": [
+        "Ne",
+        "Fi",
+        "Te",
+        "Si"
+      ],
+      "us_population_pct": 8.1,
+      "big_five_tendencies": "High Extraversion, very high Openness, higher Agreeableness; lower Conscientiousness; often higher Neuroticism.",
+      "summary": "Enthusiastic, imaginative, people-oriented; see possibilities everywhere.",
+      "core_characteristics": "Love inspiring others but need autonomy and authenticity.",
+      "strengths": [
+        "Creativity",
+        "Enthusiasm",
+        "Empathy",
+        "Connecting disparate ideas"
+      ],
+      "blind_spots": [
+        "Distractibility",
+        "Weak follow-through",
+        "Emotional swings",
+        "Over-commitment"
+      ],
+      "relationships_and_communication": "Warm, expressive, curious and fun; seeks deep connection and growth.",
+      "work_tendencies": "Marketing, media, counseling, teaching, entrepreneurship, creative direction, advocacy.",
+      "under_stress": "Inferior Si can show as dwelling on past mistakes, feeling stuck, or neglecting health and routine.",
+      "research_notes": "Common both in the general population and online, so models usually classify it better than rarer types simply because there is more data.",
+      "ai_detection_signals": [
+        "Exclamation marks and emotive vocabulary",
+        "Storytelling and tangents",
+        "Many topics per message",
+        "Social language",
+        "Possibility words (imagine, what if, so excited)"
+      ],
+      "quiz_detection": {
+        "typical_agreement_items": [
+          "I get excited about new ideas",
+          "I like meeting new people",
+          "I follow my heart",
+          "I do better with flexible plans"
+        ],
+        "profile": "strong E + strong N + strong F + strong P"
+      },
+      "commonly_confused_with": [
+        {
+          "code": "ENTP",
+          "difference": "ENTPs lead with logic"
+        },
+        {
+          "code": "ESFP",
+          "difference": "ESFPs focus on the present and sensory experience"
+        }
+      ],
+      "online_dataset_representation": "roughly proportional",
+      "study_ids": [
+        "mccrae1989",
+        "pittenger2005",
+        "capraro2002",
+        "plank2015",
+        "gjurkovic2021",
+        "peters2024",
+        "yarkoni2010",
+        "schwartz2013",
+        "kosinski2013",
+        "pennebaker1999",
+        "mairesse2007"
+      ],
+      "studies_note": "Few studies examine a single four-letter type directly. These are the studies most relevant to this type's dimensions (E/N/F/P), plus the core validity and AI-detection papers."
+    },
+    {
+      "code": "ISTJ",
+      "slug": "istj",
+      "nickname": "The Logistician",
+      "group": "Sentinels",
+      "function_stack": [
+        "Si",
+        "Te",
+        "Fi",
+        "Ne"
+      ],
+      "us_population_pct": 11.6,
+      "big_five_tendencies": "High Conscientiousness; lower Openness and Extraversion.",
+      "summary": "Dependable, methodical, fact-focused people who value duty and proven methods.",
+      "core_characteristics": "Keep commitments, value accuracy and tradition.",
+      "strengths": [
+        "Reliability",
+        "Organization",
+        "Attention to detail",
+        "Calm under pressure"
+      ],
+      "blind_spots": [
+        "Resistance to change",
+        "Can be rule-bound",
+        "Underexpresses emotion",
+        "Dismisses untested ideas"
+      ],
+      "relationships_and_communication": "Straightforward, loyal, steady; shows care through responsibility and practical help.",
+      "work_tendencies": "Accounting, administration, law enforcement, military, engineering, logistics, finance, operations.",
+      "under_stress": "Inferior Ne can show as catastrophizing and worst-case thinking about the future.",
+      "research_notes": "Very common in the general population but far less visible in internet datasets: a good example of under-representation in training data.",
+      "ai_detection_signals": [
+        "Concrete, factual, procedural language",
+        "Dates, numbers, specific nouns",
+        "First/then steps and lists",
+        "Little metaphor",
+        "Restrained emotional language"
+      ],
+      "quiz_detection": {
+        "typical_agreement_items": [
+          "I prefer proven methods",
+          "I keep my promises",
+          "I like facts over speculation",
+          "I like a tidy orderly environment"
+        ],
+        "profile": "strong I + strong S + strong T + strong J"
+      },
+      "commonly_confused_with": [
+        {
+          "code": "ISFJ",
+          "difference": "ISTJs decide on logic; ISFJs on care"
+        },
+        {
+          "code": "INTJ",
+          "difference": "ISTJs are more concrete and procedure driven"
+        }
+      ],
+      "online_dataset_representation": "under-represented",
+      "study_ids": [
+        "mccrae1989",
+        "pittenger2005",
+        "capraro2002",
+        "plank2015",
+        "gjurkovic2021",
+        "peters2024",
+        "yarkoni2010",
+        "schwartz2013",
+        "pennebaker1999",
+        "mairesse2007"
+      ],
+      "studies_note": "Few studies examine a single four-letter type directly. These are the studies most relevant to this type's dimensions (I/S/T/J), plus the core validity and AI-detection papers."
+    },
+    {
+      "code": "ISFJ",
+      "slug": "isfj",
+      "nickname": "The Defender",
+      "group": "Sentinels",
+      "function_stack": [
+        "Si",
+        "Fe",
+        "Ti",
+        "Ne"
+      ],
+      "us_population_pct": 13.8,
+      "big_five_tendencies": "High Agreeableness and Conscientiousness; lower Openness and Extraversion; often moderate-to-higher Neuroticism.",
+      "summary": "Caring, observant, responsible people who quietly provide what others need.",
+      "core_characteristics": "Value stability, tradition and loyalty.",
+      "strengths": [
+        "Dependability",
+        "Attention to people's needs",
+        "Memory for personal details",
+        "Patience"
+      ],
+      "blind_spots": [
+        "Difficulty saying no",
+        "Suppressing own needs",
+        "Resists sudden change",
+        "Avoids conflict"
+      ],
+      "relationships_and_communication": "Gentle, considerate, loyal; prefers harmony and small close circles.",
+      "work_tendencies": "Nursing and healthcare, teaching, social work, administration, archival work, customer support.",
+      "under_stress": "Inferior Ne can show as anxious what-if thinking and assuming the worst.",
+      "research_notes": "Most common type in the 1998 US sample, yet low online presence; classic example of why forum-trained models underperform on it.",
+      "ai_detection_signals": [
+        "Warm practical people-centered language",
+        "References to family, home, caring for others",
+        "Past experiences and routines",
+        "Polite modest tone",
+        "Few abstract topics"
+      ],
+      "quiz_detection": {
+        "typical_agreement_items": [
+          "I notice when others need help",
+          "I value tradition and routine",
+          "I avoid conflict",
+          "I prefer to prepare ahead"
+        ],
+        "profile": "strong I + strong S + strong F + strong J"
+      },
+      "commonly_confused_with": [
+        {
+          "code": "ISTJ",
+          "difference": "ISFJs decide on care"
+        },
+        {
+          "code": "ISFP",
+          "difference": "ISFPs are more spontaneous and individualistic"
+        }
+      ],
+      "online_dataset_representation": "under-represented",
+      "study_ids": [
+        "mccrae1989",
+        "pittenger2005",
+        "capraro2002",
+        "plank2015",
+        "gjurkovic2021",
+        "peters2024",
+        "yarkoni2010",
+        "schwartz2013",
+        "pennebaker1999",
+        "mairesse2007"
+      ],
+      "studies_note": "Few studies examine a single four-letter type directly. These are the studies most relevant to this type's dimensions (I/S/F/J), plus the core validity and AI-detection papers."
+    },
+    {
+      "code": "ESTJ",
+      "slug": "estj",
+      "nickname": "The Executive",
+      "group": "Sentinels",
+      "function_stack": [
+        "Te",
+        "Si",
+        "Ne",
+        "Fi"
+      ],
+      "us_population_pct": 8.7,
+      "big_five_tendencies": "High Conscientiousness; moderate-to-high Extraversion; lower Openness and Agreeableness.",
+      "summary": "Organized, decisive, rule-conscious people who like clear structure and accountability.",
+      "core_characteristics": "Step into leadership when order is needed.",
+      "strengths": [
+        "Organizing people and resources",
+        "Reliability",
+        "Directness",
+        "Follow-through"
+      ],
+      "blind_spots": [
+        "Can be rigid or blunt",
+        "Dismisses unconventional ideas",
+        "Overlooks emotional needs",
+        "Controlling"
+      ],
+      "relationships_and_communication": "Clear, assertive, dependable; values commitment and tradition.",
+      "work_tendencies": "Management, administration, military, law, finance, operations, project management, public service.",
+      "under_stress": "Inferior Fi can show as feeling unappreciated, hurt, or oddly self-doubting.",
+      "research_notes": "Strongly associated with Conscientiousness; common in management samples, causation unclear.",
+      "ai_detection_signals": [
+        "Directive procedural language (must, should, rules, process)",
+        "Clear standards",
+        "Confident tone, little hedging",
+        "Lists and deadlines"
+      ],
+      "quiz_detection": {
+        "typical_agreement_items": [
+          "I like rules and clear procedures",
+          "I take charge in groups",
+          "I value tradition",
+          "I finish what I start"
+        ],
+        "profile": "strong E + strong S + strong T + strong J"
+      },
+      "commonly_confused_with": [
+        {
+          "code": "ENTJ",
+          "difference": "ESTJs are more procedure oriented"
+        },
+        {
+          "code": "ISTJ",
+          "difference": "ESTJs are more outwardly directive"
+        }
+      ],
+      "online_dataset_representation": "under-represented",
+      "study_ids": [
+        "mccrae1989",
+        "pittenger2005",
+        "capraro2002",
+        "plank2015",
+        "gjurkovic2021",
+        "peters2024",
+        "yarkoni2010",
+        "schwartz2013",
+        "pennebaker1999",
+        "mairesse2007"
+      ],
+      "studies_note": "Few studies examine a single four-letter type directly. These are the studies most relevant to this type's dimensions (E/S/T/J), plus the core validity and AI-detection papers."
+    },
+    {
+      "code": "ESFJ",
+      "slug": "esfj",
+      "nickname": "The Consul",
+      "group": "Sentinels",
+      "function_stack": [
+        "Fe",
+        "Si",
+        "Ne",
+        "Ti"
+      ],
+      "us_population_pct": 12.3,
+      "big_five_tendencies": "High Extraversion, Agreeableness and Conscientiousness; lower Openness.",
+      "summary": "Sociable, warm, conscientious organizers of people and events.",
+      "core_characteristics": "Care about group harmony and tradition and are attentive to others' feelings.",
+      "strengths": [
+        "Hospitality",
+        "Teamwork",
+        "Loyalty",
+        "Practical caring"
+      ],
+      "blind_spots": [
+        "Sensitivity to criticism",
+        "Need for approval",
+        "Conflict avoidance",
+        "Can take things personally"
+      ],
+      "relationships_and_communication": "Expressive, caring, attentive; invests in relationships and shared traditions.",
+      "work_tendencies": "Healthcare, teaching, event planning, customer service, HR, nursing, hospitality, sales.",
+      "under_stress": "Inferior Ti can show as harsh over-critical logic or withdrawal into rigid reasoning.",
+      "research_notes": "Like ISFJ, very common in the population but less visible online, so forum-trained classifiers detect it poorly.",
+      "ai_detection_signals": [
+        "Social and relational vocabulary",
+        "Plans for gatherings",
+        "Family and community references",
+        "Appreciative tone",
+        "Positive sentiment"
+      ],
+      "quiz_detection": {
+        "typical_agreement_items": [
+          "I enjoy hosting",
+          "I try to keep everyone happy",
+          "I value traditions",
+          "I like to plan events"
+        ],
+        "profile": "strong E + strong S + strong F + strong J"
+      },
+      "commonly_confused_with": [
+        {
+          "code": "ENFJ",
+          "difference": "ESFJs focus on practical care and tradition"
+        },
+        {
+          "code": "ESFP",
+          "difference": "ESFPs are more spontaneous"
+        }
+      ],
+      "online_dataset_representation": "under-represented",
+      "study_ids": [
+        "mccrae1989",
+        "pittenger2005",
+        "capraro2002",
+        "plank2015",
+        "gjurkovic2021",
+        "peters2024",
+        "yarkoni2010",
+        "schwartz2013",
+        "pennebaker1999",
+        "mairesse2007"
+      ],
+      "studies_note": "Few studies examine a single four-letter type directly. These are the studies most relevant to this type's dimensions (E/S/F/J), plus the core validity and AI-detection papers."
+    },
+    {
+      "code": "ISTP",
+      "slug": "istp",
+      "nickname": "The Virtuoso",
+      "group": "Explorers",
+      "function_stack": [
+        "Ti",
+        "Se",
+        "Ni",
+        "Fe"
+      ],
+      "us_population_pct": 5.4,
+      "big_five_tendencies": "Lower Extraversion, Agreeableness and Conscientiousness; moderate Openness; low Neuroticism.",
+      "summary": "Calm, practical, analytical people who learn by doing.",
+      "core_characteristics": "Most at ease with tangible problems solved with hands and logic.",
+      "strengths": [
+        "Troubleshooting",
+        "Composure in a crisis",
+        "Technical skill",
+        "Efficiency"
+      ],
+      "blind_spots": [
+        "Can seem detached",
+        "Avoids long-term commitments and emotional talk",
+        "Risk-taking",
+        "Bored by routine"
+      ],
+      "relationships_and_communication": "Laconic and easygoing; shows care through action. Needs independence.",
+      "work_tendencies": "Engineering, mechanics, piloting, emergency response, programming, trades, forensics, athletics.",
+      "under_stress": "Inferior Fe can show as emotional outbursts or oversensitivity to others' disapproval.",
+      "research_notes": "Low Neuroticism fits the calm-under-pressure stereotype. Under-represented in text data because the type tends to write less.",
+      "ai_detection_signals": [
+        "Short concrete matter-of-fact text",
+        "Technical and practical vocabulary",
+        "Little emotional self-disclosure",
+        "Dry humor",
+        "Low word count"
+      ],
+      "quiz_detection": {
+        "typical_agreement_items": [
+          "I like working with my hands",
+          "I stay calm in emergencies",
+          "I prefer action over discussion",
+          "I don't like being tied to a schedule"
+        ],
+        "profile": "strong I + strong S + strong T + strong P"
+      },
+      "commonly_confused_with": [
+        {
+          "code": "INTP",
+          "difference": "INTPs are more theoretical"
+        },
+        {
+          "code": "ESTP",
+          "difference": "ISTPs are more reserved"
+        }
+      ],
+      "online_dataset_representation": "under-represented",
+      "study_ids": [
+        "mccrae1989",
+        "pittenger2005",
+        "capraro2002",
+        "plank2015",
+        "gjurkovic2021",
+        "peters2024",
+        "yarkoni2010",
+        "schwartz2013",
+        "pennebaker1999",
+        "mairesse2007"
+      ],
+      "studies_note": "Few studies examine a single four-letter type directly. These are the studies most relevant to this type's dimensions (I/S/T/P), plus the core validity and AI-detection papers."
+    },
+    {
+      "code": "ISFP",
+      "slug": "isfp",
+      "nickname": "The Adventurer",
+      "group": "Explorers",
+      "function_stack": [
+        "Fi",
+        "Se",
+        "Ni",
+        "Te"
+      ],
+      "us_population_pct": 8.8,
+      "big_five_tendencies": "Lower Extraversion; higher Agreeableness; moderate Openness (especially aesthetic); lower Conscientiousness.",
+      "summary": "Gentle, sensitive, artistic people who live by personal values.",
+      "core_characteristics": "Appreciate beauty and sensory experience; express themselves through action and creative work more than words.",
+      "strengths": [
+        "Artistic sensitivity",
+        "Empathy",
+        "Flexibility",
+        "Authenticity"
+      ],
+      "blind_spots": [
+        "Avoids conflict and structure",
+        "Self-critical",
+        "Long-term planning is hard",
+        "Withdraws when criticized"
+      ],
+      "relationships_and_communication": "Warm, quiet, accepting; deeply loyal to trusted people. Needs space.",
+      "work_tendencies": "Art, design, music, photography, culinary arts, healthcare, veterinary work, nature-related jobs.",
+      "under_stress": "Inferior Te can show as harsh criticism or an urge to control.",
+      "research_notes": "Aesthetic openness links to artistic interests. Often under-detected by models because they write sparsely and concretely about feelings.",
+      "ai_detection_signals": [
+        "Sensory and aesthetic vocabulary (colors, sounds, textures)",
+        "Personal-value statements",
+        "Gentle tone",
+        "Hobbies and creative pursuits",
+        "Short expressive text"
+      ],
+      "quiz_detection": {
+        "typical_agreement_items": [
+          "I am deeply moved by art and nature",
+          "I live in the moment",
+          "I dislike strict rules",
+          "I keep my feelings private"
+        ],
+        "profile": "strong I + strong S + strong F + strong P"
+      },
+      "commonly_confused_with": [
+        {
+          "code": "INFP",
+          "difference": "INFPs are more abstract"
+        },
+        {
+          "code": "ISFJ",
+          "difference": "ISFJs are more traditional and structured"
+        }
+      ],
+      "online_dataset_representation": "under-represented",
+      "study_ids": [
+        "mccrae1989",
+        "pittenger2005",
+        "capraro2002",
+        "plank2015",
+        "gjurkovic2021",
+        "peters2024",
+        "yarkoni2010",
+        "schwartz2013",
+        "pennebaker1999",
+        "mairesse2007"
+      ],
+      "studies_note": "Few studies examine a single four-letter type directly. These are the studies most relevant to this type's dimensions (I/S/F/P), plus the core validity and AI-detection papers."
+    },
+    {
+      "code": "ESTP",
+      "slug": "estp",
+      "nickname": "The Entrepreneur",
+      "group": "Explorers",
+      "function_stack": [
+        "Se",
+        "Ti",
+        "Fe",
+        "Ni"
+      ],
+      "us_population_pct": 4.3,
+      "big_five_tendencies": "High Extraversion; lower Conscientiousness and Agreeableness; lower Neuroticism; moderate Openness.",
+      "summary": "Energetic, bold, perceptive people who live in the moment.",
+      "core_characteristics": "Notice environmental detail quickly and like solving immediate problems with action.",
+      "strengths": [
+        "Quick reactions",
+        "Persuasion and negotiation",
+        "Risk tolerance",
+        "Practical problem solving"
+      ],
+      "blind_spots": [
+        "Impulsive or impatient",
+        "Underplans long-term consequences",
+        "Dislikes theory and routine"
+      ],
+      "relationships_and_communication": "Fun, direct, charismatic; enjoys shared activities and spontaneity.",
+      "work_tendencies": "Sales, entrepreneurship, emergency services, sports, trading, marketing, hospitality, law enforcement.",
+      "under_stress": "Inferior Ni can show as anxious dark premonitions or fixating on one ominous interpretation.",
+      "research_notes": "Sensation-seeking and risk-taking scales tend to relate to E and P preferences. Rare in text datasets compared to its real-world share.",
+      "ai_detection_signals": [
+        "Informal action-oriented present-tense language",
+        "Humor and banter",
+        "Sports, deals, adventure",
+        "Short punchy sentences",
+        "Competitive tone"
+      ],
+      "quiz_detection": {
+        "typical_agreement_items": [
+          "I like taking risks",
+          "I act first and think later",
+          "I read people well in the moment",
+          "I get restless with long planning"
+        ],
+        "profile": "strong E + strong S + strong T + strong P"
+      },
+      "commonly_confused_with": [
+        {
+          "code": "ESFP",
+          "difference": "ESTPs lean on logic and competition"
+        },
+        {
+          "code": "ENTP",
+          "difference": "ESTPs are more concrete"
+        }
+      ],
+      "online_dataset_representation": "under-represented",
+      "study_ids": [
+        "mccrae1989",
+        "pittenger2005",
+        "capraro2002",
+        "plank2015",
+        "gjurkovic2021",
+        "peters2024",
+        "yarkoni2010",
+        "schwartz2013",
+        "pennebaker1999",
+        "mairesse2007"
+      ],
+      "studies_note": "Few studies examine a single four-letter type directly. These are the studies most relevant to this type's dimensions (E/S/T/P), plus the core validity and AI-detection papers."
+    },
+    {
+      "code": "ESFP",
+      "slug": "esfp",
+      "nickname": "The Entertainer",
+      "group": "Explorers",
+      "function_stack": [
+        "Se",
+        "Fi",
+        "Te",
+        "Ni"
+      ],
+      "us_population_pct": 8.5,
+      "big_five_tendencies": "High Extraversion; higher Agreeableness; lower Conscientiousness; moderate Openness.",
+      "summary": "Lively, warm, spontaneous people who enjoy people and the present moment.",
+      "core_characteristics": "Naturally bring energy to a room and love sensory experiences.",
+      "strengths": [
+        "Social skill",
+        "Enthusiasm",
+        "Practical empathy",
+        "Making things fun"
+      ],
+      "blind_spots": [
+        "Difficulty with long-term planning",
+        "Avoids conflict and boredom",
+        "Distractibility",
+        "May overspend or overcommit"
+      ],
+      "relationships_and_communication": "Affectionate, generous, expressive; prefers shared experiences to abstract talk.",
+      "work_tendencies": "Performing arts, hospitality, event planning, teaching, customer-facing roles, sales, caregiving, fitness.",
+      "under_stress": "Inferior Ni can show as pessimistic ominous interpretations or sudden doubts about the future.",
+      "research_notes": "High Extraversion and Agreeableness fit the profile. Like other S types, under-represented online.",
+      "ai_detection_signals": [
+        "Exuberant informal emotive language",
+        "Emojis and exclamation marks",
+        "Stories about experiences and people",
+        "Food, music, fashion, social events",
+        "Positive sentiment"
+      ],
+      "quiz_detection": {
+        "typical_agreement_items": [
+          "I love being around people",
+          "I live for the moment",
+          "I enjoy being the center of attention",
+          "I dislike rigid schedules"
+        ],
+        "profile": "strong E + strong S + strong F + strong P"
+      },
+      "commonly_confused_with": [
+        {
+          "code": "ESFJ",
+          "difference": "ESFJs are more structured and traditional"
+        },
+        {
+          "code": "ENFP",
+          "difference": "ENFPs are more abstract"
+        },
+        {
+          "code": "ESTP",
+          "difference": "ESTPs lean on logic"
+        }
+      ],
+      "online_dataset_representation": "under-represented",
+      "study_ids": [
+        "mccrae1989",
+        "pittenger2005",
+        "capraro2002",
+        "plank2015",
+        "gjurkovic2021",
+        "peters2024",
+        "yarkoni2010",
+        "schwartz2013",
+        "pennebaker1999",
+        "mairesse2007"
+      ],
+      "studies_note": "Few studies examine a single four-letter type directly. These are the studies most relevant to this type's dimensions (E/S/F/P), plus the core validity and AI-detection papers."
+    }
+  ]
+}

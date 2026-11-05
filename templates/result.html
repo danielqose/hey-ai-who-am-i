@@ -1,0 +1,220 @@
+{% extends "base.html" %}
+{% block title %}{{ r.formula_type }} — Hey AI, who am I?{% endblock %}
+{% block body_class %}page-result{% endblock %}
+{% block head %}
+{% if r.type_meta %}
+<style>
+  body.page-result {
+    --accent: {{ r.type_meta.color }};
+    --accent-ink: #ffffff;
+    --fill: {{ r.type_meta.color }};
+    --role-soft: {{ r.type_meta.soft }};
+    --role-ink: {{ r.type_meta.ink }};
+  }
+</style>
+{% endif %}
+{% endblock %}
+{% block content %}
+<section class="result-hero result-hero-card">
+  <span class="hero-watermark" aria-hidden="true">{{ r.formula_type }}</span>
+  <div class="result-hero-text">
+    <p class="eyebrow" id="role-label">{% if r.type_meta %}{{ r.type_meta.role_label }}{% endif %}</p>
+    <p class="type-mark" id="formula-code">{{ r.formula_type }}</p>
+    <h1 id="report-title">{% if r.type_meta %}{{ r.type_meta.nickname }}{% else %}{{ r.report.title }}{% endif %}</h1>
+    <p class="lede" id="report-desc">
+      {% if r.ai_done and r.report.description %}
+        {{ r.report.description }}
+      {% elif r.type_meta %}
+        {{ r.type_meta.blurb }} Your full write-up is loading…
+      {% else %}
+        Your type is ready. Personal details are loading…
+      {% endif %}
+    </p>
+    <p class="status" id="ai-status">{% if not r.ai_done %}<span class="spinner" aria-hidden="true"></span>{{ r.ai_step }}{% endif %}</p>
+  </div>
+</section>
+
+<section class="bars" aria-label="Trait scores">
+  <h2 class="section-title">Your traits</h2>
+  {% for d in r.dimensions %}
+  <div class="bar-row">
+    <div class="bar-meta">
+      <span>{{ d.left_letter }} · {{ d.left }}</span>
+      <span>{{ d.right }} · {{ d.right_letter }}</span>
+    </div>
+    <div class="bar" title="{{ d.pct_left }}% toward {{ d.left_letter }}">
+      <span class="bar-fill" style="width: {{ d.pct_left }}%"></span>
+      <i class="bar-knob" style="left: {{ d.pct_left }}%"></i>
+    </div>
+    <p class="bar-note">
+      {{ d.pct_left }}% {{ d.left_letter }} · {{ d.pct_right }}% {{ d.right_letter }}
+      {% if d.borderline %}<strong>borderline</strong>{% endif %}
+    </p>
+  </div>
+  {% endfor %}
+</section>
+
+<section class="lists" id="lists">
+  <div class="info-card">
+    <h2><span class="ico">✨</span>Strengths</h2>
+    <ul id="list-strengths">{% for item in r.report.strengths %}<li>{{ item }}</li>{% else %}<li class="muted">Loading…</li>{% endfor %}</ul>
+  </div>
+  <div class="info-card">
+    <h2><span class="ico">🌱</span>Watch-outs</h2>
+    <ul id="list-weaknesses">{% for item in r.report.weaknesses %}<li>{{ item }}</li>{% else %}<li class="muted">Loading…</li>{% endfor %}</ul>
+  </div>
+  <div class="info-card">
+    <h2><span class="ico">🧭</span>Career ideas</h2>
+    <ul id="list-careers">{% for item in r.report.careers %}<li>{{ item }}</li>{% else %}<li class="muted">Loading…</li>{% endfor %}</ul>
+  </div>
+</section>
+
+<section class="tips">
+  <h2 class="section-title">Tips for {{ r.formula_type }}</h2>
+  <p class="hint">Friendly suggestions for studying, teamwork, and habits.</p>
+  <div class="tip-grid">
+    <div class="info-card">
+      <h3><span class="ico">📚</span>Study</h3>
+      <ul id="tips-study">{% for item in r.report.tips_study %}<li>{{ item }}</li>{% else %}<li class="muted">Loading…</li>{% endfor %}</ul>
+    </div>
+    <div class="info-card">
+      <h3><span class="ico">🤝</span>Teamwork</h3>
+      <ul id="tips-work">{% for item in r.report.tips_work %}<li>{{ item }}</li>{% else %}<li class="muted">Loading…</li>{% endfor %}</ul>
+    </div>
+    <div class="info-card">
+      <h3><span class="ico">👀</span>Watch for</h3>
+      <ul id="tips-watch">{% for item in r.report.tips_watch %}<li>{{ item }}</li>{% else %}<li class="muted">Loading…</li>{% endfor %}</ul>
+    </div>
+  </div>
+</section>
+
+<section class="experiment experiment-card" aria-label="Experiment comparison" id="experiment">
+  <h2>Quiz vs AI guess</h2>
+  <p class="hint">The quiz scores your answers with a formula. The local AI reads the same answers and guesses on its own.</p>
+  <div class="compare" id="compare-box">
+    <div class="compare-side">
+      <p class="compare-label">Quiz result</p>
+      <img
+        id="compare-formula-avatar"
+        src="{{ url_for('static', filename=r.type_meta.avatar if r.type_meta else 'chars/placeholder.svg') }}"
+        alt="{{ r.formula_type }} character"
+      >
+      <p class="compare-code">{{ r.formula_type }}</p>
+    </div>
+    <span class="vs" aria-hidden="true">vs</span>
+    <div class="compare-side" id="guess-side">
+      <p class="compare-label">AI guess</p>
+      <img
+        id="guess-avatar"
+        class="{% if not r.ai_done or not r.guess_meta %}is-empty{% endif %}"
+        src="{% if r.guess_meta %}{{ url_for('static', filename=r.guess_meta.avatar) }}{% else %}{{ url_for('static', filename='chars/placeholder.svg') }}{% endif %}"
+        alt="{% if r.guess_type %}{{ r.guess_type }} character{% else %}Waiting for AI guess{% endif %}"
+      >
+      <p class="compare-code" id="guess-code">{% if r.ai_done %}{{ r.guess_type or "—" }}{% else %}…{% endif %}</p>
+    </div>
+  </div>
+  <p class="pill {% if r.match %}match{% else %}miss{% endif %}" id="match-pill" {% if not r.ai_done %}hidden{% endif %}>
+    {% if r.match %}They match{% else %}They do not match{% endif %}
+  </p>
+  <p class="reason" id="guess-reason">{% if r.guess_reason %}{{ r.guess_reason }}{% endif %}</p>
+</section>
+
+<p class="actions">
+  <a class="btn btn-xl" href="{{ url_for('start') }}">Take it again</a>
+  <a class="btn btn-ghost" href="{{ url_for('research') }}">Research log</a>
+</p>
+
+{% if r.type_meta %}
+<aside class="pop" id="pop" aria-label="Your character">
+  <div class="pop-bubble" id="pop-bubble" role="status">
+    <button class="pop-x" id="pop-x" type="button" aria-label="Hide message">×</button>
+    <strong>You’re the {{ r.type_meta.nickname }}!</strong>
+    <span>{{ r.formula_type }} · {{ r.type_meta.role_label }}</span>
+  </div>
+  <button class="pop-char" id="pop-char" type="button" aria-label="Show message from the {{ r.type_meta.nickname }}">
+    <img src="{{ url_for('static', filename=r.type_meta.avatar) }}" alt="{{ r.type_meta.nickname }} character">
+  </button>
+</aside>
+{% endif %}
+{% endblock %}
+{% block scripts %}
+<script>
+  (function () {
+    const bubble = document.getElementById("pop-bubble");
+    if (!bubble) return;
+    const hide = () => bubble.classList.add("is-hidden");
+    const show = () => { bubble.classList.remove("is-hidden"); clearTimeout(timer); timer = setTimeout(hide, 6000); };
+    let timer = setTimeout(hide, 9000);
+    document.getElementById("pop-x").addEventListener("click", hide);
+    document.getElementById("pop-char").addEventListener("click", () => bubble.classList.contains("is-hidden") ? show() : hide());
+  })();
+</script>
+{% if not r.ai_done %}
+<script>
+  const type = {{ r.formula_type | tojson }};
+  const avatarBase = {{ url_for('static', filename='chars/') | tojson }};
+
+  function fillList(id, items) {
+    const el = document.getElementById(id);
+    el.replaceChildren();
+    const list = items && items.length ? items : ["No details this time."];
+    list.forEach((item) => {
+      const li = document.createElement("li");
+      li.textContent = item;
+      el.appendChild(li);
+    });
+  }
+
+  function setGuessAvatar(code, meta) {
+    const img = document.getElementById("guess-avatar");
+    const codeEl = document.getElementById("guess-code");
+    if (code && /^[EI][NS][TF][JP]$/.test(code)) {
+      img.src = avatarBase + code + ".png";
+      img.classList.remove("is-empty");
+      img.alt = code + " character";
+    }
+    codeEl.textContent = code || "—";
+  }
+
+  function tick() {
+    fetch("{{ url_for('job_status') }}")
+      .then((r) => r.json())
+      .then((data) => {
+        if (!data.ok) return;
+        const job = data.job;
+        const status = document.getElementById("ai-status");
+        status.innerHTML = "";
+        if (!job.ai_done) {
+          const sp = document.createElement("span");
+          sp.className = "spinner";
+          status.appendChild(sp);
+          status.appendChild(document.createTextNode(job.ai_step || "Working…"));
+        }
+        if (!job.ai_done) {
+          setTimeout(tick, 2000);
+          return;
+        }
+        if (job.report) {
+          if (job.report.title) document.getElementById("report-title").textContent = job.report.title;
+          if (job.report.description) document.getElementById("report-desc").textContent = job.report.description;
+          fillList("list-strengths", job.report.strengths);
+          fillList("list-weaknesses", job.report.weaknesses);
+          fillList("list-careers", job.report.careers);
+          fillList("tips-study", job.report.tips_study);
+          fillList("tips-work", job.report.tips_work);
+          fillList("tips-watch", job.report.tips_watch);
+        }
+        setGuessAvatar(job.guess_type, job.guess_meta);
+        const pill = document.getElementById("match-pill");
+        pill.hidden = false;
+        pill.textContent = job.match ? "They match" : "They do not match";
+        pill.className = "pill " + (job.match ? "match" : "miss");
+        document.getElementById("guess-reason").textContent =
+          job.guess_reason || job.guess_error || job.report_error || "";
+      })
+      .catch(() => setTimeout(tick, 3000));
+  }
+  tick();
+</script>
+{% endif %}
+{% endblock %}

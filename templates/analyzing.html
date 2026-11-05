@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block title %}Analyzing — Type Lab{% endblock %}
+{% block content %}
+<section class="narrow wait" id="wait">
+  <h1>The local model is reading your answers.</h1>
+  <p class="lede">This usually takes 1–2 minutes on this laptop. Leave this tab open.</p>
+  <p class="status" id="status">Scoring the formula, then asking Qwen3 for a report and an independent guess…</p>
+</section>
+{% endblock %}
+{% block scripts %}
+<script>
+  const status = document.getElementById("status");
+  fetch("{{ url_for('api_analyze') }}", { method: "POST" })
+    .then((r) => r.json().then((data) => ({ ok: r.ok, data })))
+    .then(({ ok, data }) => {
+      if (ok && data.redirect) {
+        window.location.href = data.redirect;
+        return;
+      }
+      status.textContent = data.error || "Something went wrong. Start the quiz again.";
+    })
+    .catch(() => {
+      status.textContent = "Could not reach the app. Check that it is still running.";
+    });
+</script>
+{% endblock %}

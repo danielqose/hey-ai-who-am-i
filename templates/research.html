@@ -1,0 +1,129 @@
+{% extends "base.html" %}
+{% block title %}Research log — Hey AI, who am I?{% endblock %}
+{% block body_class %}page-research{% endblock %}
+{% block content %}
+<section class="research">
+  <p class="eyebrow pill-eyebrow">Experiment</p>
+  <h1>Research log</h1>
+  <p class="lede">
+    Every finished quiz is saved here. We keep what the <strong>quiz formula</strong> decided and what the
+    <strong>local AI</strong> guessed on its own, so you can see how often they agree.
+  </p>
+
+  {% if summary.total == 0 %}
+  <div class="empty-state">
+    <img src="{{ url_for('static', filename='chars/INTP.png') }}" alt="">
+    <div>
+      <h2>Nothing here yet</h2>
+      <p>Take the quiz once and your first result will appear on this page.</p>
+      <a class="btn" href="{{ url_for('home') }}">Take the quiz</a>
+    </div>
+  </div>
+  {% else %}
+
+  <div class="stat-cards">
+    <div class="stat-card stat-ring" style="--p: {{ summary.rate }}">
+      <div class="ring"><span>{{ summary.rate }}%</span></div>
+      <div>
+        <p class="stat-big">Agreement</p>
+        <p class="stat-sub">The AI picked the same type as the quiz in {{ summary.matches }} of {{ summary.total }} runs.</p>
+      </div>
+    </div>
+    <div class="stat-card">
+      <p class="stat-num">{{ summary.total }}</p>
+      <p class="stat-sub">quizzes taken</p>
+    </div>
+    <div class="stat-card good">
+      <p class="stat-num">{{ summary.matches }}</p>
+      <p class="stat-sub">same type</p>
+    </div>
+    <div class="stat-card bad">
+      <p class="stat-num">{{ summary.different }}</p>
+      <p class="stat-sub">different type</p>
+    </div>
+  </div>
+
+  <div class="panel">
+    <h2>Which letters does the AI get right?</h2>
+    <p class="hint">A full match needs all 4 letters. Looking at each letter shows where the AI is close, even when the whole type is different. On average the AI got <strong>{{ summary.avg_letters }} of 4</strong> letters right.</p>
+    <div class="letter-grid">
+      {% for l in letters %}
+      <div class="letter-card">
+        <p class="letter-name">{{ l.name }}</p>
+        <div class="mini-bar"><span style="width: {{ l.pct }}%"></span></div>
+        <p class="letter-pct">{{ l.pct }}%</p>
+        <p class="letter-sub">{{ l.label }}</p>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+
+  <div class="panel howto">
+    <h2>How to read the runs below</h2>
+    <ul>
+      <li><strong>Quiz says</strong> is the type from the scoring formula.</li>
+      <li><strong>AI guessed</strong> is the type the model chose after reading your answers, without seeing the quiz result.</li>
+      <li>The bars show how far each answer leaned. 50% means perfectly in the middle, so that letter was a coin flip.</li>
+      <li>Click a run to open the person’s own words and the AI’s reasoning.</li>
+    </ul>
+  </div>
+
+  <h2 class="section-title">All runs <span class="muted">(newest first)</span></h2>
+  <div class="runs">
+    {% for row in rows %}
+    <details class="run {% if row.match %}is-match{% else %}is-miss{% endif %}">
+      <summary>
+        <div class="run-when">{{ row.when }}</div>
+        <div class="run-pair">
+          <div class="run-who">
+            {% if row.quiz %}<img src="{{ url_for('static', filename=row.quiz.avatar) }}" alt="">{% endif %}
+            <div><span class="run-label">Quiz says</span><strong>{{ row.quiz_code }}</strong>{% if row.quiz %}<em>{{ row.quiz.nickname }}</em>{% endif %}</div>
+          </div>
+          <span class="run-vs" aria-hidden="true">vs</span>
+          <div class="run-who">
+            {% if row.ai %}<img src="{{ url_for('static', filename=row.ai.avatar) }}" alt="">{% else %}<img src="{{ url_for('static', filename='chars/placeholder.svg') }}" alt="">{% endif %}
+            <div><span class="run-label">AI guessed</span><strong>{{ row.ai_code or "—" }}</strong>{% if row.ai %}<em>{{ row.ai.nickname }}</em>{% endif %}</div>
+          </div>
+        </div>
+        <div class="run-result">
+          <span class="badge {% if row.match %}match{% else %}miss{% endif %}">{% if row.match %}✓ Same{% else %}✗ Different{% endif %}</span>
+          <span class="letters-note">{{ row.letters_same }}/4 letters</span>
+        </div>
+        <span class="chev" aria-hidden="true"></span>
+      </summary>
+      <div class="run-body">
+        <div class="run-dims">
+          {% for d in row.dims %}
+          <div class="run-dim">
+            <div class="run-dim-head">
+              <span>{{ d.left_letter }} · {{ d.left }}</span>
+              <span>{{ d.right }} · {{ d.right_letter }}</span>
+            </div>
+            <div class="bar"><span class="bar-fill" style="width: {{ d.pct }}%"></span><i class="bar-knob" style="left: {{ d.pct }}%"></i></div>
+            <p class="run-dim-note">
+              {{ d.pct }}% {{ d.left_letter }} · {{ 100 - d.pct }}% {{ d.right_letter }}
+              {% if d.ai_letter %}
+              <span class="dim-tag {% if d.agree %}ok{% else %}no{% endif %}">Quiz {{ d.quiz_letter }} · AI {{ d.ai_letter }} {% if d.agree %}✓{% else %}✗{% endif %}</span>
+              {% endif %}
+            </p>
+          </div>
+          {% endfor %}
+        </div>
+        <div class="run-text">
+          <div class="quote">
+            <p class="quote-label">What the person wrote about themselves</p>
+            <p>{{ row.about or "—" }}</p>
+          </div>
+          <div class="quote">
+            <p class="quote-label">Why the AI chose {{ row.ai_code or "its type" }}</p>
+            <p>{{ row.reason or "—" }}</p>
+          </div>
+        </div>
+      </div>
+    </details>
+    {% endfor %}
+  </div>
+  {% endif %}
+  <p class="actions"><a class="btn" href="{{ url_for('home') }}">Back to quiz</a></p>
+</section>
+{% endblock %}

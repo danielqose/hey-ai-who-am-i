@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" role="img" aria-label="ESTP character">
+  <rect width="240" height="240" rx="28" fill="#FBF3DE"/>
+  <g transform="translate(4,0)">
+    <!-- body -->
+    <path d="M78 210c8-46 30-70 42-70s34 24 42 70" fill="#C4921A"/>
+    <circle cx="120" cy="100" r="36" fill="#F7D7C4"/>
+    <path d="M88 80c12-26 50-24 60 2M150 78l10-14 6 12" fill="#C4921A"/>
+    <!-- face -->
+    <circle cx="108" cy="98" r="3.5" fill="#4a3428"/>
+    <circle cx="132" cy="98" r="3.5" fill="#4a3428"/>
+    <path d="M112 114c6 8 16 8 22 0" fill="none" stroke="#4a3428" stroke-width="3" stroke-linecap="round"/>
+    <circle cx="108" cy="96" r="14" fill="none" stroke="#C4921A" stroke-width="5"/><circle cx="140" cy="96" r="14" fill="none" stroke="#C4921A" stroke-width="5"/><path d="M122 96h12" stroke="#C4921A" stroke-width="4"/>
+  </g>
+  <text x="20" y="36" font-family="Segoe UI, Arial, sans-serif" font-size="18" font-weight="700" fill="#C4921A">ESTP</text>
+</svg>

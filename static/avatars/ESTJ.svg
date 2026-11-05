@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" role="img" aria-label="ESTJ character">
+  <rect width="240" height="240" rx="28" fill="#E6F4F8"/>
+  <g transform="translate(4,0)">
+    <!-- body -->
+    <path d="M78 210c8-46 30-70 42-70s34 24 42 70" fill="#4298B5"/>
+    <circle cx="120" cy="100" r="36" fill="#F7D7C4"/>
+    <path d="M90 86c10-24 48-24 58 0" fill="#4298B5"/>
+    <!-- face -->
+    <circle cx="108" cy="98" r="3.5" fill="#4a3428"/>
+    <circle cx="132" cy="98" r="3.5" fill="#4a3428"/>
+    <path d="M112 114c6 8 16 8 22 0" fill="none" stroke="#4a3428" stroke-width="3" stroke-linecap="round"/>
+    <rect x="148" y="120" width="44" height="54" rx="4" fill="#fff" stroke="#4298B5" stroke-width="3"/><path d="M156 136l6 6 12-14M156 154l6 6 12-14" stroke="#4298B5" stroke-width="3" fill="none"/>
+  </g>
+  <text x="20" y="36" font-family="Segoe UI, Arial, sans-serif" font-size="18" font-weight="700" fill="#4298B5">ESTJ</text>
+</svg>

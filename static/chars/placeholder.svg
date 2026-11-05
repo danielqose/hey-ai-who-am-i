@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 150" role="img" aria-label="Waiting">
+  <ellipse cx="60" cy="138" rx="30" ry="6" fill="#2b2547" opacity=".08"/>
+  <circle cx="60" cy="62" r="46" fill="#ece6ff"/>
+  <text x="60" y="84" text-anchor="middle" font-family="Fredoka, Nunito, Arial, sans-serif" font-size="68" font-weight="600" fill="#a591f5">?</text>
+</svg>
